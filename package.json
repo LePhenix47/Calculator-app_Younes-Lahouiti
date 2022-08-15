@@ -1,0 +1,18 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "This JSON file contains the scripts to compile SASS code",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass": "sass -w ./style.scss:./style.css -c -s compressed",
+    "prefix": "postcss ./style.css --autoprefixer -d ./build/style.css"
+  },
+  "author": "Younes Lahouiti",
+  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^10.4.8",
+    "postcss": "^8.4.16",
+    "postcss-cli": "^10.0.0"
+  }
+}

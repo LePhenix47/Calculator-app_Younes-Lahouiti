@@ -1,0 +1,170 @@
+//Reset, normalization and typography
+*,
+::before,
+::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    color: white;
+    font-family: 'Roboto', 'Courier New', Courier, monospace;
+    overflow-x: hidden;
+    font-variant-numeric: tabular-nums;
+}
+
+
+//Variables and maps
+$color-calculator: #101a22;
+$color-interface: #23303b;
+$border-interface-color: #595a5b;
+$equals-to-button-color: #f5c060;
+$CE-to-button-color: #f56060;
+
+
+$breakpoints: (
+    mobile: 768px,
+    tablet: 992px,
+    laptop: 1150px,
+    desktop: 1920px
+);
+
+
+//Mixins
+@mixin center-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin grid($rows: 1, $columns: 1) {
+    display: grid;
+    grid-template-rows: repeat($rows, 1fr);
+    grid-template-columns: repeat($columns, 1fr);
+}
+
+//SASS styling
+
+.main {
+    background: linear-gradient(to right,
+            #f1f1f1, #f8dab0,
+            #ffc371);
+    height: 100vh;
+    width: 100%;
+    @include center-flex;
+}
+
+.calculator {
+    width: 400px;
+    height: 600px;
+    background-color: $color-calculator;
+    border-radius: 25px;
+    box-shadow: 0px 3px 6px grey;
+
+    &__interface {
+        background-color: $color-interface;
+
+        border: 1px solid $border-interface-color;
+        border-radius: 20px;
+
+        box-shadow: 0px 5px 5px inset $color-calculator, 0px -5px 5px inset $color-calculator;
+
+        height: 120px;
+
+        margin: 30px 30px;
+        padding: 20px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        &-inputs {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: right;
+        }
+    }
+
+    &__buttons {
+        @include grid(5, 4);
+        margin: 25px 25px 5px 25px;
+        height: 400px;
+    }
+
+    &__button {
+        height: 60px;
+        width: 100%;
+        background-color: $color-calculator;
+        color: white;
+        border-radius: 10px;
+        font-size: 24px;
+        font-weight: 300;
+        border: none;
+
+        box-shadow: 0px -5px 5px #262d33, 0px 5px 5px #080b0e;
+
+        transition: background-color 50ms ease-out;
+
+        &:hover {
+            background-color: darken($color-calculator, 10%);
+        }
+
+        &:active {
+            background-color: lighten($color-calculator, 10%);
+        }
+
+        &-container {
+            margin: 5px;
+        }
+
+        &-container--span-2 {
+            grid-column-end: span 2;
+        }
+
+
+        &-clear {
+            //Has to be spanned by 2 columns
+
+            color: black;
+            background-color: white;
+
+            &:hover {
+                background-color: darken(white, 10%);
+            }
+
+            &:active {
+                background-color: lighten(grey, 20%);
+            }
+
+        }
+
+        &-clear-entry {
+            background-color: $CE-to-button-color;
+
+            &:hover {
+                background-color: darken($CE-to-button-color, 10%);
+            }
+
+            &:active {
+                background-color: lighten($CE-to-button-color, 10%);
+            }
+        }
+
+        &-equal {
+            color: black;
+            background-color: $equals-to-button-color;
+
+            &:hover {
+                background-color: darken($equals-to-button-color, 10%);
+            }
+
+            &:active {
+                background-color: lighten($equals-to-button-color, 10%);
+            }
+        }
+    }
+
+}
