@@ -13,4 +13,4 @@ If the equation is very long, the outputted result might be equal to "NaN" (aka 
 Though in the console in the DevTools you can see the result of the equation
 
 
-GitHub Pages: 
+GitHub Pages: https://lephenix47.github.io/Calculator-app_Younes-Lahouiti/
