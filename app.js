@@ -285,5 +285,13 @@ function reset() {
 
 //Removes the last digit
 function removeLastDigit() {
-  concatenatedValues = concatenatedValues.slice(-1);
+  if (concatenatedValues === "" || concatenatedValues === 0) {
+    return;
+  }
+  concatenatedValues = concatenatedValues.slice(
+    0,
+    concatenatedValues.length - 1
+  );
+  calculatorOutputComputation.textContent = concatenatedValues;
+  console.log(concatenatedValues);
 }
