@@ -105,6 +105,7 @@ $breakpoints: (
             overflow: hidden;
             text-overflow: ellipsis;
             text-align: right;
+            font-weight: 300;
 
             @include mobile-only {
                 font-size: 10px;
