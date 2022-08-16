@@ -3,15 +3,26 @@ const calculatorOutputComputation = document.querySelector(
   ".calculator__interface-inputs"
 );
 
+const calculatorOutputSubstringComputation = document.querySelector(
+  ".calculator__interface-subtext-inputs"
+);
+
 const equalButton = document.querySelector(".calculator__button-equal");
 const clearEntryButton = document.querySelector(
   ".calculator__button-clear-entry"
 );
 const clearButton = document.querySelector(".calculator__button-clear");
 
-const numberREGEX = /^[0-9]$/;
+const numberREGEX = /[0-9]/;
 
 const operatorSymbolsREGEX = /[\+\-÷×]/;
+
+const operatorSymbols = {
+  plus: "+",
+  minus: "-",
+  multiplication: "×",
+  division: "÷",
+};
 
 //JS decided to do a little bit of trolling and not letting me get the already filtered array so I had to make a copy AND only then filter it
 let numberButtons = Array.from(calculatorButtons);
@@ -45,9 +56,7 @@ function initialiseCalculator() {
 
 initialiseCalculator();
 
-equalButton.addEventListener("click", () => {
-  console.log("EQUAL button clicked");
-});
+equalButton.addEventListener("click", computeEquation);
 
 /* 
 
@@ -76,8 +85,9 @@ function handleOperators(e) {
   let operatorButtonValue = e.target.outerText;
   console.log("operatorButtonValue = ", operatorButtonValue);
 
-  if (!concatenatedValues && operatorButtonValue === "-") {
-    //When the user immediatly presses the minus operator, it adds
+  if (!concatenatedValues && operatorButtonValue === operatorSymbols.minus) {
+    // === "-"
+    //When the user immediatly presses the minus operator, it adds it immediatly
     concatenatedValues += operatorButtonValue;
     calculatorOutputComputation.textContent = concatenatedValues;
     return;
@@ -94,5 +104,24 @@ function handleOperators(e) {
   } else {
     concatenatedValues += operatorButtonValue;
     calculatorOutputComputation.textContent = concatenatedValues;
+  }
+}
+
+function computeEquation(e) {
+  console.log("Equal button clicked!");
+  console.log(
+    "Does the equation finish with a number? ",
+    numberREGEX.test(concatenatedValues.slice(-1)) ? "Yes" : "No"
+  );
+  if (operatorSymbolsREGEX.test(concatenatedValues.slice(-1))) {
+    calculatorOutputSubstringComputation.textContent =
+      "Please finish the calculation with a number";
+    console.log(numberREGEX.test(concatenatedValues.slice(-1)));
+    calculatorOutputSubstringComputation.classList.add("fade-out");
+    setTimeout(() => {
+      calculatorOutputSubstringComputation.textContent = "";
+      calculatorOutputSubstringComputation.classList.remove("fade-out");
+    }, 3600);
+    return;
   }
 }

@@ -32,6 +32,13 @@ $breakpoints: (
 
 
 //Mixins
+
+@mixin mobile-only {
+    @media screen and (max-width: map-get($breakpoints, mobile)) {
+        @content;
+    }
+}
+
 @mixin center-flex {
     display: flex;
     justify-content: center;
@@ -62,8 +69,14 @@ $breakpoints: (
     border-radius: 25px;
     box-shadow: 0px 3px 6px grey;
 
+    @include mobile-only {
+        width: 95vw;
+        height: 85vh;
+    }
+
     &__interface {
         background-color: $color-interface;
+        overflow: hidden;
 
         border: 1px solid $border-interface-color;
         border-radius: 20px;
@@ -85,6 +98,17 @@ $breakpoints: (
             overflow: hidden;
             text-overflow: ellipsis;
             text-align: right;
+        }
+
+        &-subtext-inputs {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            text-align: right;
+
+            @include mobile-only {
+                font-size: 10px;
+            }
         }
     }
 
@@ -167,4 +191,20 @@ $breakpoints: (
         }
     }
 
+}
+
+
+
+.fade-out {
+    animation: fadeOut 2500ms 1000ms ease-out forwards;
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
